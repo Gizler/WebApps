@@ -1,0 +1,19 @@
+.grid_main {
+	display: grid;
+	grid-template-columns: 400px auto 200px;
+	grid-template-rows: 200px auto 300px;
+	justify-content: space-between;
+	align-content: space-between;
+}
+
+body {
+	background-color: #AAAA99;
+}
+
+nav {
+	color: red;
+}
+
+footer {
+	color: green;
+}
