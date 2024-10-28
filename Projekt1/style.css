@@ -4,11 +4,14 @@
 	grid-template-rows: 200px auto 300px;
 	justify-content: space-between;
 	align-content: space-between;
+	background-color: #BBBBAA;
 }
 
-body {
-	background-color: #AAAA99;
+.main {
+	background-color: #DDDDCC;
 }
+
+.
 
 nav {
 	color: red;
