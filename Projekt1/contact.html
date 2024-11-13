@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Projekt</title>
+		<link rel="stylesheet" href="style.css">
+		<script>
+			function Clock() {
+				const currentDate = new Date();
+				let hours = currentDate.getHours();
+				let minutes = currentDate.getMinutes();
+				if(minutes<10) {
+					minutes="0"+minutes;
+				}
+				document.getElementById('clock').innerHTML=hours+":"+minutes
+				setTimeout(Clock, 1000);
+			}
+		</script>	
+	</head>
+	<body onload="Clock()">
+		<div class="topHolder">
+			<nav class="left">
+				<a href="index.html">Strona Główna</a>
+			</nav>
+			<header><img class="headerImage" src="HeaderImage.png"></header>
+			<nav class="right">
+				<a href="contact.html">Kontakt</a>
+				<a href="gallery.html">Galeria</a>
+			</nav>
+		</div>
+		<div class="grid-container">
+			<div class="spacer left"> </div>
+			<div class="dividerColumn"> </div>
+			<div class="page-center">
+				<div id="clock"></div>
+				<form>
+					<label for="email">Adres E-mail:</label>
+					<input type="text" id="email" name="Email" placeholder="twoj@email.com..." required pattern="\w+@\w+\.\w{2,}[\w.]*"><br>
+					<label for="topic">Temat:</labebl>
+					<input type="text" id="topic" name="Topic" placeholder="Temat..." required><br>
+					<label for="message">Wiadomość:</label>
+					<textarea id="message" name="Message">Treść wiadomości...</textarea><br>
+					<input type="submit" value="Wyślij">
+				</form>
+			</div>
+			<div class="dividerColumn"> </div>
+			<div class="spacer right"> </div>
+			<footer>Patryk Gizler</footer>
+		</div>
+	</body>
+</html>
