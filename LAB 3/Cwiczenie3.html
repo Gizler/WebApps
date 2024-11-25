@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Cwiczenie 3</title>
+		<style>
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin-top: 20px;
+			}
+			th, td {
+				border: 1px solid #ddd;
+				padding: 8px;
+				text-align: left;
+			}
+			th {
+				background-color: #f4f4f4;
+			}
+			img {
+				max-width: 100px;
+				height: auto;
+			}
+		</style>
+		
+		<script>
+			let table=null;
+			let searchQuery=null;
+			let selector=null;
+			let rawData=[];
+			let data=[];
+			let filterString="";
+			
+			async function init() {
+				table = document.getElementById("output");
+				searchQuerry = document.getElementById("search");
+				selector = document.getElementById("sorting");
+				const response = await fetch("https://dummyjson.com/products");
+				rawData = (await response.json()).products;
+				data=rawData.slice(0,30);
+				display();
+			}
+			
+			function sortData() {
+				data.sort(function(a,b) {
+					if(a.title<b.title) return -1;
+					if(a.title>b.title) return 1;
+					return 0;
+					}
+				);
+			}
+
+			function display() {
+				for(let i=0;i<30 && i<data.length;i++) {
+					const row = table.insertRow(i);
+					const image = row.insertCell(0);
+					const title = row.insertCell(1);
+					const description = row.insertCell(2);
+					const img = document.createElement('img');
+					img.src=data[i].thumbnail;
+					img.alt="Image Error";
+					image.appendChild(img);
+					title.textContent = data[i].title;
+					description.textContent = data[i].description;
+				}
+			}
+
+			function filterTest(s) {
+				return s.title.toUpperCase().includes(filterString);
+			}
+			
+			function apply() {
+				filterString=searchQuerry.value.toUpperCase();
+				data=rawData.filter(filterTest);
+				if(sorting.value!="default") {
+					sortData();
+					if(sorting.value=="desc")
+						data.reverse();
+				}
+				table.innerHTML="";
+				data=data.slice(0,30);
+				display();
+			}
+			
+		</script>
+	</head>
+	<body onload="init()">
+		<input type="text" id="search" placeholder="search"><br>
+		<label for="sorting">Sort </label>
+		<select name="sorting" id="sorting">
+			<option value="default">Default</option>
+			<option value="asc">Ascending</option>
+			<option value="desc">Descending</option>
+		</select>
+		<button id="filter" onclick="apply()">Apply</button>
+		<table id="output">
+		</table>
+	</body>
+</html>
+

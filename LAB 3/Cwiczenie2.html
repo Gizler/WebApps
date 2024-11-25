@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			function generate() {
+				let minlen = document.getElementById("minlen");
+				let maxlen = document.getElementById("maxlen");
+				let bigLetters = document.getElementById("bigLetters").checked;
+				let symbols = document.getElementById("symbols").checked;
+				if(!minlen.checkValidity() || !maxlen.checkValidity()) {
+					alert("Incorrect input field values!");
+					return;
+				}
+				minlen=Number(minlen.value);
+				maxlen=Number(maxlen.value);
+				if(minlen>maxlen) {
+					alert("Minimal length must be less or equal to Max length")
+					return;
+				}
+				let set="0123456789abcdefghijklmnopqrstuvwxyz";
+				const upperCase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				const specials="!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+				let len=minlen+Math.floor(Math.random()*(maxlen+1-minlen));
+				let passwd="";
+				if(bigLetters)
+					set+=upperCase;
+				if(symbols)
+					set+=specials;
+				let range=set.length;
+				for(let i=0;i<len;i++) {
+					passwd+=set[Math.floor(Math.random()*range)];
+				}
+				alert(passwd);
+			}
+			
+		</script>
+		<style>
+			input:invalid {
+				border: 1px solid red;
+			}
+			input:valid {
+				border: 1px solid green;
+			}
+		</style>
+	</head>
+	<body onload="">
+		<input type="text" id="minlen" name="minlen" placeholder="Min length" required pattern="\d+*"><br>
+		<input type="text" id="maxlen" name="maxlen" placeholder="Max length" required pattern="\d+"><br>
+		<input type="checkbox" id="bigLetters" value="bigLetters">
+		<label for="bigLetters">Big letters<label><br>
+		<input type="checkbox" id="symbols">
+		<label for="symbols">Symbols</label><br>
+		<input type="button" id="generate" value="Generate" onclick="generate()">
+					
+					
+		<br><br>
+		<div id="debug">text</div>
+	</body>
+</html>
+<!-- sort tytuly i wyszukiwanie tytuly -->
+<!-- canvas do animacji -->
+<!-- przed sama gre osobno zrobic clickable box i animacje -->

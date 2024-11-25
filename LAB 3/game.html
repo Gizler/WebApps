@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				width:100%;
+				margin: 0;
+				overflow: hidden;
+				background: url('images/board-bg.jpg') no-repeat center center fixed;
+				background-size: cover;
+				cursor: none;
+			}
+			
+			.cursor {
+				position: absolute;
+				pointer-events: none;
+				width: 200px;
+				height: 200px;
+			}
+			
+			div.failed {
+				border: 2px solid red;
+				text-align: center;
+				background-color: rgb(90,90,90);
+				position: relative;
+				top: 50%;
+				left: 30%;
+				width: 40%;
+			}
+			
+			div.popup {
+				position: absolute;
+				width:100%;
+				height:100%;
+				background-color: rgba(0,0,0,0.6);
+				display: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="popup" id="popup">
+			<div class="failed" id="failed">
+				<h2>Game Over!</h2>
+				<p>Your score: <span id="finalScore"></span></p>
+				<button onclick="reset()">Restart</button>
+			</div>
+		</div>
+		<img class="cursor" src="images/aim.png"></div>
+		<script src="game.js"></script>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+		let stopper = {
+				seconds: 0,
+				minutes: 0,
+				lastDate: new Date(),
+				running: false,
+				GetDelta: function() {
+					return Math.floor((new Date() - stopper.lastDate)/1000);
+				},
+				Reset: function() {
+					this.lastDate= new Date();
+					this.seconds = 0;
+					this.minutes = 0;
+					this.running=false;
+				},
+				Start: function() {
+					this.lastDate= new Date();
+					this.running = true;
+				},
+				Stop: function() {
+					this.running = false;
+					this.seconds+=this.GetDelta();
+					this.minutes+=Math.floor(this.seconds/60);
+					this.seconds=this.seconds%60;
+				},
+				Display: function() {
+					let seconds=stopper.seconds;
+					let minutes=stopper.minutes;
+					if(stopper.running) {
+						seconds+=stopper.GetDelta();
+						minutes+=Math.floor(seconds/60);
+						seconds=seconds%60;
+					}
+					if(minutes==0)
+						minutes="";
+					else
+						minutes=minutes+"min "
+					seconds=seconds+"s"
+					document.getElementById('stopperDiv').innerHTML=minutes+seconds;
+					setTimeout(stopper.Display,1000);
+				}
+			}
+		</script>
+	</head>
+	<body onload="stopper.Display()">
+		<button type="button" onclick="stopper.Start()">Start</button>
+		<button type="button" onclick="stopper.Stop()">Stop</button>
+		<button type="button" onclick="stopper.Reset()">Reset</button>
+		<br><br>
+		<div id="stopperDiv">Error</div>
+	</body>
+</html>
+<!-- sort tytuly i wyszukiwanie tytuly -->
+<!-- canvas do animacji -->
+<!-- przed sama gre osobno zrobic clickable box i animacje -->
